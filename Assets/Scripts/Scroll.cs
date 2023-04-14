@@ -7,6 +7,6 @@ public class Scroll : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.left * GameManager.Instance.GetScrollSpeed() * Time.deltaTime);
+        transform.Translate(transform.forward * GameManager.Instance.GetScrollSpeed() * Time.deltaTime);
     }
 }

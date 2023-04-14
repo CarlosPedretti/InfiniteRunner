@@ -4,17 +4,18 @@ using System.Collections;
 
 public class Movement : MonoBehaviour
 {
-    public float speed = 50.0f;
-    private float horizontalInput;
-    private float verticalInput;
-    private Vector3 movedirection;
+    public float speed = 0.1f;
+
+     bool LeftMove;
+     bool RightMove;
 
 
 
-    private bool groundedPlayer;
-
-
-
+    void Start()
+    {
+        LeftMove = true;
+        RightMove = true;
+    }
 
     void OnCollisionEnter(Collision other)
     {
@@ -23,18 +24,52 @@ public class Movement : MonoBehaviour
             GameManager.Instance.ShowGameOverScreen();
             Time.timeScale = 0f;
         }
+
     }
 
+    void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.tag == "LeftWall")
+        {
+            LeftMove = false;
+
+        }
+        else
+        {
+            LeftMove = true;
+        }
+
+        if (other.gameObject.tag == "RightWall")
+        {
+            RightMove = false;
+
+        }
+        else
+        {
+            RightMove = true;
+        }
+    }
 
 
 
     void Update()
     {
 
+            if (Input.GetKey(KeyCode.A) && LeftMove == true)
+            {
+                transform.Translate(Vector3.left * speed * Time.deltaTime);
 
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-        movedirection = new Vector3(horizontalInput, 0, verticalInput);
-        transform.Translate(movedirection * speed * Time.deltaTime);
+            }
+        
+
+      
+            if (Input.GetKey(KeyCode.D) && RightMove == true)
+            {
+                transform.Translate(Vector3.right * speed * Time.deltaTime);
+            }
+     
     }
+
+
+    
 }

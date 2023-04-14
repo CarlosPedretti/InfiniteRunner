@@ -10,8 +10,10 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject GameOverScreen;
     [SerializeField] private TMP_Text ScoreText;
+    [SerializeField] private TMP_Text CoinText;
 
     private int score;
+    private int coins;
     public float timer;
     private float scrollSpeed;
     public float initialScrollSpeed = 8f;
@@ -37,6 +39,8 @@ public class GameManager : MonoBehaviour
         UpdateScore();
 
         UpdateSpeed();
+
+        UpdateCoins();
     }
 
 
@@ -57,6 +61,16 @@ public class GameManager : MonoBehaviour
         timer += Time.deltaTime;
         score = (int)(timer * scorePerSeconds);
         ScoreText.text = string.Format("{0:00000}", score);
+    }
+
+    void UpdateCoins()
+    {
+
+        //CoinText.text = "Coins: " + coins.ToString();
+        if (coins < 0)
+        {
+            coins = 0;
+        }
     }
 
     public float GetScrollSpeed()
