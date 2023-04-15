@@ -5,15 +5,22 @@ using UnityEngine;
 public class Coins : MonoBehaviour
 {
 
+    [SerializeField] private GameManager coins;
+    [SerializeField] private int valueCoins;
+
+
     void Start()
     {
         
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+
+        if (other.gameObject.tag == "Player")
         {
+
+            coins.AdditionCoins(valueCoins);
             Destroy(gameObject);
         }
     }

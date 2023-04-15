@@ -66,11 +66,13 @@ public class GameManager : MonoBehaviour
     void UpdateCoins()
     {
 
-        //CoinText.text = "Coins: " + coins.ToString();
-        if (coins < 0)
-        {
-            coins = 0;
-        }
+        CoinText.text = "Coins: " + coins.ToString("0");
+
+    }
+
+    public void AdditionCoins(int initialCoin)
+    {
+        coins += initialCoin;
     }
 
     public float GetScrollSpeed()
